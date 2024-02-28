@@ -2,21 +2,22 @@ import React from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined, DashOutlined  } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import TableForm from "../components/table";
+import {NavLink, Outlet} from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
 
 const items1: MenuProps['items'] = ['1'].map((key) => ({
     key,
-    label: `SSI ${key}`,
+    label: `SSI`,
+    component: <NavLink to={'/department'}/>
 }));
 const dashboardNames = ['Dashboard', 'Attendance', 'CV', 'Review'];
 const optionNames = [
-    ['Option 1', 'Option 2'],
-    ['Option A', 'Option B'],
-    ['Option I', 'Option II', 'Option III', 'Option IV', 'ssss', 'ssccx'],
-    ['Option !', 'Option @', 'Option #', 'Option $']
+    ['Department', 'Employee', 'Attendance'],
+    ['Option A', 'Option B', 'Option C', 'Option D'],
+    ['Option I', 'Option II'],
 ];
+
 const items2: MenuProps['items'] = [DashOutlined, UserOutlined, LaptopOutlined, NotificationOutlined].map(
     (icon, index) => {
         const key = String(index + 1);
@@ -31,11 +32,11 @@ const items2: MenuProps['items'] = [DashOutlined, UserOutlined, LaptopOutlined, 
                 key: `sub${key}`,
                 icon: React.createElement(icon),
                 label: dashboardNames[index],
-                children: new Array(4).fill(null).map((_, j) => {
-                    const subKey = index * 4 + j + 1;
+                children: optionNames[index - 1].map((element) => {
+                    // const subKey = index * 4 + j + 1;
                     return {
-                        key: subKey,
-                        label: optionNames[index][j],
+                        // key: subKey,
+                        label: element,
                     };
                 }),
             };
@@ -60,6 +61,7 @@ const LayoutForm: React.FC<LayoutFormProps> = ({contentComponent }) => {
                     defaultSelectedKeys={['1']}
                     items={items1}
                     style={{ flex: 1, minWidth: 0 }}
+
                 />
             </Header>
             <Layout>
@@ -75,8 +77,6 @@ const LayoutForm: React.FC<LayoutFormProps> = ({contentComponent }) => {
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        {/*<Breadcrumb.Item>List</Breadcrumb.Item>*/}
-                        {/*<Breadcrumb.Item>App</Breadcrumb.Item>*/}
                     </Breadcrumb>
                     <Content
                         style={{
@@ -91,6 +91,7 @@ const LayoutForm: React.FC<LayoutFormProps> = ({contentComponent }) => {
                     </Content>
                 </Layout>
             </Layout>
+            <Outlet/>
         </Layout>
     );
 };

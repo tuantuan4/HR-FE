@@ -26,7 +26,6 @@ const CreateForm: React.FC<CreateFormProps> = ({formFields, disabled = false}) =
 
     return (
         <>
-
             <Form
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
