@@ -8,12 +8,11 @@ const { Header, Content, Sider } = Layout;
 
 const items1: MenuProps['items'] = ['1'].map((key) => ({
     key,
-    label: `SSI`,
-    component: <NavLink to={'/department'}/>
+    label: <NavLink to='/departments'>SSI</NavLink>,
 }));
 const dashboardNames = ['Dashboard', 'Attendance', 'CV', 'Review'];
 const optionNames = [
-    ['Department', 'Employee', 'Attendance'],
+    ['Departments', 'Employees', 'Attendances'],
     ['Option A', 'Option B', 'Option C', 'Option D'],
     ['Option I', 'Option II'],
 ];
@@ -25,7 +24,7 @@ const items2: MenuProps['items'] = [DashOutlined, UserOutlined, LaptopOutlined, 
             return {
                 key: `sub${key}`,
                 icon: React.createElement(icon),
-                label: dashboardNames[index],
+                label: <NavLink to='/'>{dashboardNames[index]}</NavLink>,
             };
         } else {
             return {
@@ -33,10 +32,10 @@ const items2: MenuProps['items'] = [DashOutlined, UserOutlined, LaptopOutlined, 
                 icon: React.createElement(icon),
                 label: dashboardNames[index],
                 children: optionNames[index - 1].map((element) => {
-                    // const subKey = index * 4 + j + 1;
                     return {
                         // key: subKey,
-                        label: element,
+                        label: <NavLink to={'/'.concat(element.toLowerCase())}>{element}</NavLink>,
+
                     };
                 }),
             };

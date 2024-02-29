@@ -9,10 +9,20 @@ export const routes = (
     [
         {
             path: "/",
-            element: <LayoutForm contentComponent={<DashBoard/>}/>
+            element: <LayoutForm contentComponent={<DashBoard/>}/>,
+            children: [
+                {
+                    path: "dashboard",
+                    element: <PageNotFound />,
+                },
+                {
+                    path: "about",
+                    element: <PageNotFound />,
+                },
+            ],
         },
         {
-            path: "/department",
+            path: "/departments",
             element: <LayoutForm contentComponent={<TableForm/>}/>
         },
         {
