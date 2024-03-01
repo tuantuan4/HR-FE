@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Space, Table, Tag, Button } from 'antd';
 import ButtonSave from "../button/ButtonSave";
 import ButtonDelete from "../button/ButtonDelete";
 
@@ -14,70 +14,45 @@ interface DataType {
     tags: string[];
 }
 
-const data: DataType[] = [
-    {
-        key: '1',
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        firstName: 'Joe',
-        lastName: 'Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
-const handleDelete = () => {
-    // Xử lý logic xóa ở đây
-    console.log('Item deleted');
-};
-const TableForm: React.FC = () => (
-    <Table dataSource={data}>
-        <ButtonSave/>
-        <ColumnGroup title="Name">
-            <Column title="First Name" dataIndex="firstName" key="firstName" />
-            <Column title="Last Name" dataIndex="lastName" key="lastName" />
-        </ColumnGroup>
-        <Column title="Age" dataIndex="age" key="age" />
-        <Column title="Address" dataIndex="address" key="address" />
-        <Column
-            title="Tags"
-            dataIndex="tags"
-            key="tags"
-            render={(tags: string[]) => (
-                <>
-                    {tags.map((tag) => (
-                        <Tag color="blue" key={tag}>
-                            {tag}
-                        </Tag>
-                    ))}
-                </>
-            )}
-        />
-        <Column
-            title="Action"
-            key="action"
-            render={(_: any, record: DataType) => (
-                <Space size="middle">
-                    <a>Edit</a>
-                    <ButtonDelete onDelete={handleDelete} />
-                </Space>
-            )}
-        />
-    </Table>
+interface RowData {
+    key: React.Key;
+    [key: string]: any;
+}
+interface DepartmentProps<T extends RowData> {
+    data?: T[];
+    columns: { title: string, dataIndex: string, key: string }[];
+    handleDelete: () => void;
+}
+const TableForm: React.FC<DepartmentProps<any>> = ({data, columns, handleDelete}) => (
+    <div>
+        <Button type="primary" style={{ marginBottom: 16 }}>
+            Add a row
+        </Button>
+        <Table
+            dataSource={data}
+            pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}
+        >
+            {
+                columns.map(column => (
+                    <Column
+                        title={column.title}
+                        dataIndex={column.dataIndex}
+                        key={column.key}
+                    />
+                ))
+            }
+            <Column
+                title="Action"
+                key="action"
+                render={(_: any, record: DataType) => (
+                    <Space size="middle">
+                        <a>Edit</a>
+                        <ButtonDelete onDelete={handleDelete} />
+                    </Space>
+                )}
+            />
+        </Table>
+    </div>
 );
 
 export default TableForm;

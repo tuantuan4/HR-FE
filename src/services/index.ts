@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://api.fake-rest.refine.dev",
     headers: {
         "Content-type": "application/json"
     }

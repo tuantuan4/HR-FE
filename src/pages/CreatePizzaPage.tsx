@@ -10,7 +10,7 @@ const formFields = [
 
 const CreatePizzaPage = () => {
     return(
-        <CreateForm formFields={formFields} disabled={false}/>
+        <CreateForm formFields={formFields}/>
     )
 }
 export default CreatePizzaPage
