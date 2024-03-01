@@ -8,17 +8,17 @@ export const initalDepartmentList: Department[] = [
     {
         id: '1',
         name: 'DEV1',
-        displayName: 'Phat trien phan mem 1'
+        description: 'Phat trien phan mem 1'
     },
     {
         id: '2',
         name: 'DEV2',
-        displayName: 'Phat trien phan mem 2'
+        description: 'Phat trien phan mem 2'
     },
     {
         id: '3',
         name: 'DEV3',
-        displayName: 'Phat trien phan mem 3'
+        description: 'Phat trien phan mem 3'
     },
 
 ]

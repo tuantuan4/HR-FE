@@ -14,14 +14,17 @@ const initialState: DepartmentState = {
     editingDepartment: null
 }
 
-export const addDepartment = createAction<Department>('blog/addDepartment')
-export const deleteDepartment = createAction<string>('blog/deleteDepartment')
-export const startEditingDepartment = createAction<string>('blog/startEditingDepartment')
-export const cancelEditingDepartment = createAction('blog/cancelEditingDepartment')
-export const finishEditingDepartment = createAction<Department>('blog/finishEditingDepartment')
+export const addDepartment = createAction<Department>('attendance/addDepartment')
+export const deleteDepartment = createAction<string>('attendance/deleteDepartment')
+export const startEditingDepartment = createAction<string>('attendance/startEditingDepartment')
+export const cancelEditingDepartment = createAction('attendance/cancelEditingDepartment')
+export const finishEditingDepartment = createAction<Department>('attendance/finishEditingDepartment')
 
 const departmentReducer = createReducer(initialState, builder => {
-
+    builder.addCase(addDepartment, (state, action) => {
+        const department =action.payload
+        state.departmentList.push(department)
+    })
 })
 
 export default departmentReducer
